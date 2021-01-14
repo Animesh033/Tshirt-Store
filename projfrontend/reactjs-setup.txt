@@ -1,0 +1,12 @@
+1. To create react-app run command -
+npx create-react-app projfrontend
+
+2. Follow below steps -
+    cd projfrontend
+    npm start
+
+For myrouter -
+3. run command - npm install react-router-dom
+
+4. run command - npm i query-string - to pass the query
+

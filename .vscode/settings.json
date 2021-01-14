@@ -1,0 +1,18 @@
+{
+    "files.autoSave": "afterDelay",
+    "editor.formatOnType": true,
+    "css.fileExtensions": [
+
+        "css",
+        "scss"
+    ],
+    "emmet.includeLanguages": {
+        "vue-html": "html",
+        "javascript": "javascriptreact",
+    },
+    "emmet.extensionsPath": "",
+    "emmet.preferences": {
+
+    },
+    "eslint.nodePath": ""
+}

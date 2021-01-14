@@ -1,0 +1,15 @@
+
+Getting started with express -
+Steps -  
+1: run command - npm init and fill the info which is asked
+2: Install express using command - npm i express (i stands for install)
+3: Create entry point file i.e index.js
+4: Install cors using command - npm i cors
+5: Goto express docs and read something about express (https://expressjs.com/en/starter/hello-world.html)
+
+Install Nodemon: npm install nodemon
+Used for reload, automatically
+
+
+To start with mongodb run this command using cmd - 
+"C:\Program Files\MongoDB\Server\4.2\bin\mongod.exe" --dbpath="c:\data\db"

@@ -1,0 +1,16 @@
+1. To install react-app run command -
+npm -g i create-react-app then
+
+2. To create react-app run command -
+npx create-react-app lcotodo
+
+3. Follow below steps -
+    cd lcotodo
+    npm start
+
+For myrouter -
+1. run command - npm install react-router-dom
+
+2. Install extensions -
+a. React Native Tools
+b. Simple React Snippets

@@ -1,0 +1,24 @@
+User Name - kumar.animesh303@gmail.com
+Password - Animesh@03Stripe
+
+Required packages -
+1. cors - https://www.npmjs.com/package/cors (npm i cors)
+2. express - https://www.npmjs.com/package/express (npm i express)
+3. stripe - https://www.npmjs.com/package/stripe (npm i stripe)
+4. uuid - https://www.npmjs.com/package/uuid (npm i uuid)
+5. nodemon - https://www.npmjs.com/package/nodemon (npm i nodemon)
+6. dotenv - https://www.npmjs.com/package/dotenv (npm i dotenv)
+
+Install all package once - npm i cors express stripe uuid nodemon dotenv
+
+Materialize - https://materializecss.com/
+
+Steps to create project for stripe -
+1. create the stripebackend folder
+2. Goto inside this created folder (stripebackend)
+3. Run - npm init
+4. Goto outside of this folder (stripebackend) and run command - npx create-react-app stripefrontend
+
+Payment Gateways -
+1. https://stripe.com/en-in
+2. https://developers.braintreepayments.com/
