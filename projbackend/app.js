@@ -20,18 +20,38 @@ mongoose
   .connect(process.env.DATABASE, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
   })
   .then(() => {
     console.log("DB CONNECTED");
   });
 
 //Middlewares
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+// Allow cross-origin.....
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+//   );
+//   next();
+// });
+
 //My Routes
+app.get(["/", "/api"], (req, res, next) => {
+  res.status(200).json({
+    message: "API server is running...",
+  });
+});
+
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);

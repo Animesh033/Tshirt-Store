@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
 import { Link } from "react-router-dom";
+import { Buffer } from "buffer";
 import {
   getCategories,
   getProduct,
-  updateProduct
+  // getProductPhoto,
+  updateProduct,
 } from "./helper/adminapicall";
 import { isAutheticated } from "../auth/helper/index";
 
@@ -23,7 +25,7 @@ const UpdateProduct = ({ match }) => {
     error: "",
     createdProduct: "",
     getaRedirect: false,
-    formData: ""
+    formData: "",
   });
 
   const {
@@ -31,44 +33,49 @@ const UpdateProduct = ({ match }) => {
     description,
     price,
     stock,
+    photo,
     categories,
     category,
-    loading,
-    error,
+    // loading,
+    // error,
     createdProduct,
-    getaRedirect,
-    formData
+    // getaRedirect,
+    formData,
   } = values;
 
-  const preload = productId => {
-    getProduct(productId).then(data => {
-      //console.log(data);
+  const preload = (productId) => {
+    getProduct(productId).then((data) => {
+      console.log(data);
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
         preloadCategories();
-        setValues({
-          ...values,
+
+        setValues((prevValues) => ({
+          ...prevValues,
           name: data.name,
           description: data.description,
           price: data.price,
-          category: data.category._id,
+          category: data?.category?._id,
           stock: data.stock,
-          formData: new FormData()
-        });
+          photo: getImageUrl(data.photo),
+          formData: new FormData(),
+        }));
       }
     });
   };
 
   const preloadCategories = () => {
-    getCategories().then(data => {
+    getCategories().then((data) => {
+      console.log(data);
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
-        setValues({
+        setValues((prevValues) => ({
+          ...prevValues,
           categories: data,
-          formData: new FormData()
-        });
+          formData: new FormData(),
+        }));
       }
     });
   };
@@ -77,32 +84,37 @@ const UpdateProduct = ({ match }) => {
     preload(match.params.productId);
   }, []);
 
+  const getImageUrl = (imageBuffer) => {
+    let imageStr = Buffer.from(imageBuffer.data, "binary").toString("base64");
+    return `data:${imageBuffer.contentType};base64,${imageStr}`;
+  };
+
   //TODO: work on it
-  const onSubmit = event => {
+  const onSubmit = (event) => {
     event.preventDefault();
     setValues({ ...values, error: "", loading: true });
 
     updateProduct(match.params.productId, user._id, token, formData).then(
-      data => {
+      (data) => {
         if (data.error) {
           setValues({ ...values, error: data.error });
         } else {
-          setValues({
-            ...values,
-            name: "",
-            description: "",
-            price: "",
-            photo: "",
-            stock: "",
+          setValues((prevValues) => ({
+            ...prevValues,
+            name: data.name,
+            description: data.description,
+            price: data.price,
+            photo: getImageUrl(data.photo),
+            stock: data.stock,
             loading: false,
-            createdProduct: data.name
-          });
+            createdProduct: data.name,
+          }));
         }
       }
     );
   };
 
-  const handleChange = name => event => {
+  const handleChange = (name) => (event) => {
     const value = name === "photo" ? event.target.files[0] : event.target.value;
     formData.set(name, value);
     setValues({ ...values, [name]: value });
@@ -110,7 +122,7 @@ const UpdateProduct = ({ match }) => {
 
   const successMessage = () => (
     <div
-      className="alert alert-success mt-3"
+      className="mt-3 alert alert-success"
       style={{ display: createdProduct ? "" : "none" }}
     >
       <h4>{createdProduct} updated successfully</h4>
@@ -120,6 +132,9 @@ const UpdateProduct = ({ match }) => {
   const createProductForm = () => (
     <form>
       <span>Post photo</span>
+      <div className="form-group">
+        <img src={photo} alt="product" srcSet="" width="100px" />
+      </div>
       <div className="form-group">
         <label className="btn btn-block btn-success">
           <input
@@ -163,6 +178,7 @@ const UpdateProduct = ({ match }) => {
           onChange={handleChange("category")}
           className="form-control"
           placeholder="Category"
+          value={category}
         >
           <option>Select</option>
           {categories &&
@@ -186,7 +202,7 @@ const UpdateProduct = ({ match }) => {
       <button
         type="submit"
         onClick={onSubmit}
-        className="btn btn-outline-success mb-3"
+        className="mb-3 btn btn-outline-success"
       >
         Update Product
       </button>
@@ -197,12 +213,12 @@ const UpdateProduct = ({ match }) => {
     <Base
       title="Add a product here!"
       description="Welcome to product creation section"
-      className="container bg-info p-4"
+      className="container p-4 bg-info"
     >
-      <Link to="/admin/dashboard" className="btn btn-md btn-dark mb-3">
+      <Link to="/admin/dashboard" className="mb-3 btn btn-md btn-dark">
         Admin Home
       </Link>
-      <div className="row bg-dark text-white rounded">
+      <div className="text-white rounded row bg-dark">
         <div className="col-md-8 offset-md-2">
           {successMessage()}
           {createProductForm()}

@@ -22,3 +22,4 @@ Steps to create project for stripe -
 Payment Gateways -
 1. https://stripe.com/en-in
 2. https://developers.braintreepayments.com/
+

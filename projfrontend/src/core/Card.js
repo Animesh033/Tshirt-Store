@@ -7,9 +7,9 @@ const Card = ({
   product,
   addtoCart = true,
   removeFromCart = false,
-  setReload = f => f,
+  setReload = (f) => f,
   //   function(f){return f}
-  reload = undefined
+  reload = undefined,
 }) => {
   const [redirect, setRedirect] = useState(false);
   const [count, setCount] = useState(product.count);
@@ -22,18 +22,18 @@ const Card = ({
     addItemToCart(product, () => setRedirect(true));
   };
 
-  const getARedirect = redirect => {
+  const getARedirect = (redirect) => {
     if (redirect) {
       return <Redirect to="/cart" />;
     }
   };
 
-  const showAddToCart = addtoCart => {
+  const showAddToCart = (addtoCart) => {
     return (
       addtoCart && (
         <button
           onClick={addToCart}
-          className="btn btn-block btn-outline-success mt-2 mb-2"
+          className="mt-2 mb-2 btn btn-block btn-outline-success"
         >
           Add to Cart
         </button>
@@ -41,7 +41,7 @@ const Card = ({
     );
   };
 
-  const showRemoveFromCart = removeFromCart => {
+  const showRemoveFromCart = (removeFromCart) => {
     return (
       removeFromCart && (
         <button
@@ -49,7 +49,7 @@ const Card = ({
             removeItemFromCart(product._id);
             setReload(!reload);
           }}
-          className="btn btn-block btn-outline-danger mt-2 mb-2"
+          className="mt-2 mb-2 btn btn-block btn-outline-danger"
         >
           Remove from cart
         </button>
@@ -57,7 +57,7 @@ const Card = ({
     );
   };
   return (
-    <div className="card text-white bg-dark border border-info ">
+    <div className="text-white border card bg-dark border-info ">
       <div className="card-header lead">{cartTitle}</div>
       <div className="card-body">
         {getARedirect(redirect)}
@@ -65,7 +65,7 @@ const Card = ({
         <p className="lead bg-success font-weight-normal text-wrap">
           {cartDescrption}
         </p>
-        <p className="btn btn-success rounded  btn-sm px-4">$ {cartPrice}</p>
+        <p className="px-4 rounded btn btn-success btn-sm">$ {cartPrice}</p>
         <div className="row">
           <div className="col-12">{showAddToCart(addtoCart)}</div>
           <div className="col-12">{showRemoveFromCart(removeFromCart)}</div>

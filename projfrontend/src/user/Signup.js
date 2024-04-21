@@ -9,20 +9,20 @@ const Signup = () => {
     email: "",
     password: "",
     error: "",
-    success: false
+    success: false,
   });
 
   const { name, email, password, error, success } = values;
 
-  const handleChange = name => event => {
+  const handleChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
 
-  const onSubmit = event => {
+  const onSubmit = (event) => {
     event.preventDefault();
     setValues({ ...values, error: false });
     signup({ name, email, password })
-      .then(data => {
+      .then((data) => {
         if (data.error) {
           setValues({ ...values, error: data.error, success: false });
         } else {
@@ -32,7 +32,7 @@ const Signup = () => {
             email: "",
             password: "",
             error: "",
-            success: true
+            success: true,
           });
         }
       })
@@ -42,7 +42,7 @@ const Signup = () => {
   const signUpForm = () => {
     return (
       <div className="row">
-        <div className="col-md-6 offset-sm-3 text-left">
+        <div className="text-left col-md-6 offset-sm-3">
           <form>
             <div className="form-group">
               <label className="text-light">Name</label>
@@ -84,7 +84,7 @@ const Signup = () => {
   const successMessage = () => {
     return (
       <div className="row">
-        <div className="col-md-6 offset-sm-3 text-left">
+        <div className="text-left col-md-6 offset-sm-3">
           <div
             className="alert alert-success"
             style={{ display: success ? "" : "none" }}
@@ -100,7 +100,7 @@ const Signup = () => {
   const errorMessage = () => {
     return (
       <div className="row">
-        <div className="col-md-6 offset-sm-3 text-left">
+        <div className="text-left col-md-6 offset-sm-3">
           <div
             className="alert alert-danger"
             style={{ display: error ? "" : "none" }}
@@ -117,7 +117,7 @@ const Signup = () => {
       {successMessage()}
       {errorMessage()}
       {signUpForm()}
-      <p className="text-white text-center">{JSON.stringify(values)}</p>
+      <p className="text-center text-white">{JSON.stringify(values)}</p>
     </Base>
   );
 };

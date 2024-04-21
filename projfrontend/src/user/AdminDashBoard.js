@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 
 const AdminDashBoard = () => {
   const {
-    user: { name, email, role }
+    user: { name, email, role },
   } = isAutheticated();
 
   const adminLeftSide = () => {
     return (
       <div className="card">
-        <h4 className="card-header bg-dark text-white">Admin Navigation</h4>
+        <h4 className="text-white card-header bg-dark">Admin Navigation</h4>
         <ul className="list-group">
           <li className="list-group-item">
             <Link to="/admin/create/category" className="nav-link text-success">
@@ -45,14 +45,14 @@ const AdminDashBoard = () => {
 
   const adminRightSide = () => {
     return (
-      <div className="card mb-4">
+      <div className="mb-4 card">
         <h4 className="card-header">Admin Information</h4>
         <ul className="list-group">
           <li className="list-group-item">
-            <span className="badge badge-success mr-2">Name:</span> {name}
+            <span className="mr-2 badge badge-success">Name:</span> {name}
           </li>
           <li className="list-group-item">
-            <span className="badge badge-success mr-2">Email:</span> {email}
+            <span className="mr-2 badge badge-success">Email:</span> {email}
           </li>
 
           <li className="list-group-item">
@@ -66,7 +66,7 @@ const AdminDashBoard = () => {
     <Base
       title="Welcome to admin area"
       description="Manage all of your products here"
-      className="container bg-success p-4"
+      className="container p-4 bg-success"
     >
       <div className="row">
         <div className="col-3">{adminLeftSide()}</div>

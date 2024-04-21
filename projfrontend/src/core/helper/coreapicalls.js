@@ -1,9 +1,10 @@
 import { API } from "../../backend";
 
 export const getProducts = () => {
-  return fetch(`${API}/products`, { method: "GET" })
-    .then(response => {
+  const getProductsURL = `${API}/products`;
+  return fetch(getProductsURL, { method: "GET" })
+    .then((response) => {
       return response.json();
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };

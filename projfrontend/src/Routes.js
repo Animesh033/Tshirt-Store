@@ -9,6 +9,7 @@ import UserDashBoard from "./user/UserDashBoard";
 import AdminDashBoard from "./user/AdminDashBoard";
 import AddCategory from "./admin/AddCategory";
 import ManageCategories from "./admin/ManageCategories";
+import UpdateCategory from "./admin/UpdateCategory";
 import AddProduct from "./admin/AddProduct";
 import ManageProducts from "./admin/ManageProducts";
 import UpdateProduct from "./admin/UpdateProduct";
@@ -33,6 +34,11 @@ const Routes = () => {
           path="/admin/categories"
           exact
           component={ManageCategories}
+        />
+        <AdminRoute
+          path="/admin/category/update/:categoryId"
+          exact
+          component={UpdateCategory}
         />
         <AdminRoute path="/admin/create/product" exact component={AddProduct} />
 

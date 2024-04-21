@@ -19,7 +19,7 @@ const AddProduct = () => {
     error: "",
     createdProduct: "",
     getaRedirect: false,
-    formData: ""
+    formData: "",
   });
 
   const {
@@ -28,16 +28,16 @@ const AddProduct = () => {
     price,
     stock,
     categories,
-    category,
-    loading,
+    // category,
+    // loading,
     error,
     createdProduct,
-    getaRedirect,
-    formData
+    // getaRedirect,
+    formData,
   } = values;
 
   const preload = () => {
-    getCategories().then(data => {
+    getCategories().then((data) => {
       //console.log(data);
       if (data.error) {
         setValues({ ...values, error: data.error });
@@ -51,11 +51,11 @@ const AddProduct = () => {
     preload();
   }, []);
 
-  const onSubmit = event => {
+  const onSubmit = (event) => {
     event.preventDefault();
     setValues({ ...values, error: "", loading: true });
-      createaProduct(user._id, token, formData).then(data => {
-        console.log(data)
+    createaProduct(user._id, token, formData).then((data) => {
+      console.log(data);
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
@@ -67,13 +67,13 @@ const AddProduct = () => {
           photo: "",
           stock: "",
           loading: false,
-          createdProduct: data.name
+          createdProduct: data.name,
         });
       }
     });
   };
 
-  const handleChange = name => event => {
+  const handleChange = (name) => (event) => {
     const value = name === "photo" ? event.target.files[0] : event.target.value;
     formData.set(name, value);
     setValues({ ...values, [name]: value });
@@ -81,7 +81,7 @@ const AddProduct = () => {
 
   const successMessage = () => (
     <div
-      className="alert alert-success mt-3"
+      className="mt-3 alert alert-success"
       style={{ display: createdProduct ? "" : "none" }}
     >
       <h4>{createdProduct} created successfully</h4>
@@ -90,12 +90,12 @@ const AddProduct = () => {
 
   const errorMessage = () => (
     <div
-      className="alert alert-danger mt-3"
+      className="mt-3 alert alert-danger"
       style={{ display: error ? "" : "none" }}
     >
       <h4>{error}!</h4>
     </div>
-  )
+  );
   const createProductForm = () => (
     <form>
       <span>Post photo</span>
@@ -165,7 +165,7 @@ const AddProduct = () => {
       <button
         type="submit"
         onClick={onSubmit}
-        className="btn btn-outline-success mb-3"
+        className="mb-3 btn btn-outline-success"
       >
         Create Product
       </button>
@@ -176,12 +176,12 @@ const AddProduct = () => {
     <Base
       title="Add a product here!"
       description="Welcome to product creation section"
-      className="container bg-info p-4"
+      className="container p-4 bg-info"
     >
-      <Link to="/admin/dashboard" className="btn btn-md btn-dark mb-3">
+      <Link to="/admin/dashboard" className="mb-3 btn btn-md btn-dark">
         Admin Home
       </Link>
-      <div className="row bg-dark text-white rounded">
+      <div className="text-white rounded row bg-dark">
         <div className="col-md-8 offset-md-2">
           {successMessage()}
           {errorMessage()}

@@ -10,7 +10,9 @@
         "vue-html": "html",
         "javascript": "javascriptreact",
     },
-    "emmet.extensionsPath": "",
+    "emmet.extensionsPath": [
+        ""
+    ],
     "emmet.preferences": {
 
     },
